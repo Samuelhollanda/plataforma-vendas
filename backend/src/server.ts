@@ -1,9 +1,12 @@
 // src/index.ts
 import express from 'express';
+import cors from 'cors';
 import produtoRoutes from './routes/produtoRoutes';
 import vendaRoutes from './routes/vendaRoutes'
 
 const app = express();
+
+app.use(cors());
 
 // Middleware MUITO IMPORTANTE: permite que o Express entenda requisições com corpo em JSON
 app.use(express.json());

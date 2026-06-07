@@ -1,9 +1,10 @@
-import './App.css'
+import { ListaProdutos } from "./pages/ListarProdutos"
+
 function App() {
 
   return (
     <>
-      <h1>HelloWord(print)</h1>
+      <ListaProdutos />
     </>
   )
 }
