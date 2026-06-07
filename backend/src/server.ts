@@ -1,18 +1,17 @@
-import express, {Request, Response} from 'express';
+// src/index.ts
+import express from 'express';
+import produtoRoutes from './routes/produtoRoutes';
 
 const app = express();
 
-const port = process.env.PORT || 3001;
-
+// Middleware MUITO IMPORTANTE: permite que o Express entenda requisições com corpo em JSON
 app.use(express.json());
 
-app.get('/', (req: Request, res: Response) => {
-    res.json({
-        status: 'sucesso',
-        message: 'Backend em TS rodando com Docker!'
-    });
-});
+// Toda requisição que começar com /produtos será redirecionada para as rotas de produtos
+app.use('/produtos', produtoRoutes);
 
-app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}`);
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
