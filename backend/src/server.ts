@@ -1,6 +1,7 @@
 // src/index.ts
 import express from 'express';
 import produtoRoutes from './routes/produtoRoutes';
+import vendaRoutes from './routes/vendaRoutes'
 
 const app = express();
 
@@ -9,6 +10,8 @@ app.use(express.json());
 
 // Toda requisição que começar com /produtos será redirecionada para as rotas de produtos
 app.use('/produtos', produtoRoutes);
+
+app.use('/vendas', vendaRoutes);
 
 const PORT = process.env.PORT || 3001;
 

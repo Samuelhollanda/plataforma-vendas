@@ -1,4 +1,3 @@
-import { NetworkResources } from "node:inspector/promises";
 import prisma from "../config/prisma";
 
 export class VendaService {
@@ -21,7 +20,11 @@ export class VendaService {
                 data: {
                     quantidade: quantidadeVendida,
                     valorTotal: valorTotal,
-                    produtoId: produtoId,
+                    produto: {
+                        connect: {
+                            id: produtoId
+                        }
+                    }
                 },
             }),
 
