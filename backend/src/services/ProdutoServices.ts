@@ -10,7 +10,22 @@ export class ProdutoService {
                 descricao: data.descricao,
             },
         });
-
+    
         return produto;
+    }
+
+    async adcionarEstoque(id: string, quantidadeAdcionada: number) {
+        const produtoAtualizado = await prisma.produto.update({
+            where: {
+                id: id,
+            },
+            data: {
+                quantidade_estoque: {
+                    increment: quantidadeAdcionada,
+                },
+            },
+        });
+
+        return produtoAtualizado;
     }
 }

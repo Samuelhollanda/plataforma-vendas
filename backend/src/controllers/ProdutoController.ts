@@ -24,7 +24,34 @@ export class ProdutoController {
             return res.status(201).json(novoProduto);
         } catch (error) {
             console.error(error);
-            return res.status(500).json({ erro: 'Erro interno no servidor ao criar produto.'})
+            return res.status(500).json({ erro: 'Erro interno no servidor ao criar produto.' })
+        }
+    }
+
+    async adicionarEstoque(req: Request, res: Response) {
+        try {
+            const { id } = req.params;
+            const { quantidade } = req.body;
+
+            if (!id || typeof id !== 'string') {
+                return res.status(400).json({ erro: 'O ID do produto é inválido' });
+            }
+
+            if (quantidade === undefined || typeof quantidade !== 'number' || quantidade <= 0) {
+                return res.status(400).json({ erro: 'Envie uma uantidade válida maior que zero.' });
+            }
+
+            const produto = await produtoService.adcionarEstoque(id, quantidade);
+
+            return res.status(200).json(produto);
+        } catch (error: any) {
+            // P2025 = codigo de erro especifico do prisma uanbdo não acha o id no banco
+            if (error.code === 'P2025') {
+                return res.status(404).json({ erro: 'Produto não encontrado.' });
+            }
+
+            console.error(error);
+            return res.status(500).json({ error: 'Erro interno ao ataluizar o estoque.' });
         }
     }
 }
