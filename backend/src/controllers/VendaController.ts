@@ -25,4 +25,15 @@ export class VenderController {
             return res.status(500).json({ erro: 'Erro interno ao realizar a venda.' });
         }
     }
+
+    async listarVendas(req: Request, res: Response) {
+        try {
+            const vendas = await vendaService.listarVendas();
+
+            return res.status(200).json(vendas);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ erro: 'Erro interno ao buscar o histórico de vendas.' });
+        }
+    }
 }

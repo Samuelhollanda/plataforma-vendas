@@ -41,4 +41,17 @@ export class VendaService {
 
         return resultado[0];
     }
+
+    async listarVendas() {
+        const vendas = await prisma.venda.findMany ({
+            orderBy: {
+                criadoEm: 'desc',
+            },
+            include: {
+                produto: true,
+            },
+        });
+
+        return vendas;
+    }
 }
