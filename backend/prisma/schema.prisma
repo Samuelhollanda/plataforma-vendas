@@ -4,7 +4,7 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
@@ -21,6 +21,19 @@ model Produto {
   criadoEm           DateTime @default(now())
   atualizadoEm       DateTime @updatedAt
 
-  @@map("produtos")
+  // um produto pode estar relacionado a várias vendas
+  vendas Venda[]
 
+  @@map("produtos")
+}
+
+model Venda {
+  id         String   @id @default(uuid())
+  quantidade Int
+  valorTotal Float
+  criadoEm   DateTime @default(now())
+
+  // Chave estrangeira que guarda o id do produto vendido
+  produtoID String
+  produto   Produto @relation(fields: [produtoID], references: [id])
 }
