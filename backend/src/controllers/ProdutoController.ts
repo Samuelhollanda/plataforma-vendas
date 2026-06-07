@@ -54,4 +54,15 @@ export class ProdutoController {
             return res.status(500).json({ error: 'Erro interno ao ataluizar o estoque.' });
         }
     }
+
+    async listar(req: Request, res: Response) {
+        try {
+            const produtos = await produtoService.listarProdutos();
+
+            return res.status(200).json(produtos);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ erro: 'Erro interno ao listar produtos. '});
+        }
+    }
 }

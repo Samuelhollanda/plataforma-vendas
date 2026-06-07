@@ -28,4 +28,14 @@ export class ProdutoService {
 
         return produtoAtualizado;
     }
+
+    async listarProdutos() {
+            const produtos = await prisma.produto.findMany({
+                orderBy: {
+                    criadoEm: 'desc',
+                }
+            });
+
+            return produtos;
+    }
 }
