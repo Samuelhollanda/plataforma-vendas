@@ -7,6 +7,9 @@ const produtoService = new ProdutoService();
 export class ProdutoController {
     async criar(req: Request, res: Response) {
         try {
+
+            console.log("DADOS QUE CHEGARAM DO REACT:", req.body);
+
             const { nome, preco, quantidade_estoque, descricao } = req.body;
 
             if (!nome || preco === undefined) {
@@ -62,7 +65,7 @@ export class ProdutoController {
             return res.status(200).json(produtos);
         } catch (error) {
             console.error(error);
-            return res.status(500).json({ erro: 'Erro interno ao listar produtos. '});
+            return res.status(500).json({ erro: 'Erro interno ao listar produtos. '})
         }
     }
 }
