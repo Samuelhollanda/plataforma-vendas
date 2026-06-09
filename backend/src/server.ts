@@ -6,7 +6,11 @@ import vendaRoutes from './routes/vendaRoutes'
 
 const app = express();
 
-app.use(cors());
+app.use(cors(
+  {
+  origin: 'http://localhost:3000'
+  }
+));
 
 // Middleware MUITO IMPORTANTE: permite que o Express entenda requisições com corpo em JSON
 app.use(express.json());
