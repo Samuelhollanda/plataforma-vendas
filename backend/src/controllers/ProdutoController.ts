@@ -8,8 +8,6 @@ export class ProdutoController {
     async criar(req: Request, res: Response) {
         try {
 
-            console.log("DADOS QUE CHEGARAM DO REACT:", req.body);
-
             const { nome, preco, quantidade_estoque, descricao } = req.body;
 
             if (!nome || preco === undefined) {
@@ -23,7 +21,6 @@ export class ProdutoController {
                 quantidade_estoque,
                 descricao,
             });
-            // Retorna sucesso (Status 201: Created)
             return res.status(201).json(novoProduto);
         } catch (error) {
             console.error(error);
