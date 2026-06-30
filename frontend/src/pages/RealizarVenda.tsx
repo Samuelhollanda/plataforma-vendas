@@ -2,6 +2,7 @@ import api from "../services/api";
 import type { Produto } from "../types/produto";
 import { useState, useEffect } from "react";
 import type {FormEvent} from "react";
+import axios from "axios";
 
 
 export const RealizarVenda = () => {
@@ -46,9 +47,15 @@ export const RealizarVenda = () => {
             // Limpa os campos após a venda
             setProdutoId("")
             setQuantidade("")
-        } catch (error: any) {
+        } catch (error) {
             console.log(error);
-            alert(error.response?.data?.erro || 'erro ao realizar a venda');
+
+            if(axios.isAxiosError(error)) {
+                const errorMessage = error.response?.data?.error || 'Erro ao realizar venda';
+                console.log(errorMessage);
+            } else {
+                alert('Erro inesperado ao realizar venda');
+            }
         }
     }
     return(
@@ -71,7 +78,7 @@ export const RealizarVenda = () => {
                         ))}
                     </select>
                 </div>
-
+￼
                 <div>
 
                 </div>

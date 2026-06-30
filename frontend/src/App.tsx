@@ -1,5 +1,6 @@
 import { ListaProdutos } from "./pages/ListarProdutos"
 import { CadastroProduto } from "./pages/CadastroProduto"
+import { RealizarVenda} from "./pages/RealizarVenda.tsx";
 
 function App() {
 
@@ -14,6 +15,10 @@ function App() {
       
       {/* A lista de produtos que já criámos */}
       <ListaProdutos />
+
+      <hr />
+
+      <RealizarVenda />
     </div>
   )
 }
